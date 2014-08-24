@@ -1,0 +1,79 @@
+														> Tema de trabajo:	
+														>>social engineering|supersede|Phishing
+
+
+
+
+
+
+=============================
+	      Paises
+=============================
+pk | pk_id_pas|Int32      	|>==|
+   | nom_pas  |varchar(50) 	|	|
+____________________________|	|
+								|
+=============================	|
+	     Usuarios				|
+=============================	|
+pk | pk_id_usu|Int32      	|>==|=|=========================================|		=============================		 ============================
+fk | fk_is_pas|Int32 		|<==| |											|				EstudioUsu						  NivelEstudio
+   | nom_usu  |varchar(50) 	|	  |											|		=============================		 ============================
+   | ape_usu  |varchar(50) 	|	|=|											|		pk | pk_id_est|Int32		|	 |=< pk | pk_id_niv|Int32		|
+   | fec_usu  |date     	|	|											|======>fk | fk_id_usu|Int32		|	 |	    | nivel    |varchar(50) |
+   | mail_usu |varchar(50) 	|	|											|		fk | fk_id_niv|Int32		|<===|      | est_niv  |bit			|
+   | fec_ing  |date 		|	|											|		   | des_tit  |varchar(50)	|		 ___________________________|
+   | pass_usu |varchar(500) |	|											|		   | est_est  |bit			|					 
+   | salt_usu |varchar(500) |	|											|		____________________________|
+   | est_usu  |bit   		|	|											|
+____________________________|	|											|		=============================		 ============================
+								|											|				DataExtraUsu					    GeneroDist
+	 							|											|		=============================		 ============================
+=============================	|		=============================		|		pk | pk_id_dat|Int32		|	 |=< pk | pk_id_gen|Int32		|
+	     TiposComent			|		     	 Comentarios				|======>fk | fk_id_usu|Int32		|	 |	    | genero   |varchar(50) |
+=============================	|		=============================		|		fk | fk_id_gen|Int32		|<===|      | est_niv  |bit			|
+pk | pk_id_tip|Int32      	|>==|===|	pk | pk_id_com|Int32      	|>==|	|		   | des_tit  |varchar(50)	|		 ___________________________|
+   | tipo_come|varchar(50)  |	|   |	fk | fk_is_usu|Int32 		|<==|===|		   | est_est  |bit			|					 
+____________________________|	|   |==>fk | fk_id_tip|Int32     	|	|	|		____________________________|
+								|   |	   | contenido|varchar(max) |	|	|
+								|   |	   | est_com  |bit   		|	|	|
+ 								|   |	____________________________|	|	|
+								|   |									|	|
+=============================	|   |									|	|
+	 RespuestasComent			|   |									|	|
+=============================	|   |									|	|
+pk | pk_id_res|Int32      	|   |   |									|	|
+fk | fk_is_usu|Int32 		|<==|   |									|	|
+fk | fk_id_tip|Int32     	|<==|===|									|	|
+   | fk_id_com|Int32 		|<==|=======================================|	|
+   | contenido|varchar(max) |	|											|
+   | est_com  |bit   		|	|											|
+____________________________|	|											|
+								|											|
+	 							|											|
+=============================	|		=============================		|
+	     TiposTemas				|		     	   Debates					|
+=============================	|		=============================		|
+pk | pk_id_tit|Int32      	|>==|===|	pk | pk_id_deb|Int32      	|>==|	|
+   | tipo_come|varchar(50)  |	|   |	fk | fk_is_usu|Int32 		|<==|===|			 
+____________________________|	|   |==>fk | fk_id_tit|Int32     	|	|	
+								|   	   | contenido|varchar(max) |	|
+								|   	   | est_com  |bit   		|	|
+ 								|   	____________________________|	|
+								|   									|
+=============================	|   									|
+	 RespuestasDebate			|   									|
+=============================	|   									|
+pk | pk_id_res|Int32      	|   |   									|
+fk | fk_is_usu|Int32 		|<==|   									|
+   | fk_id_com|Int32 		|<==========================================|
+   | contenido|varchar(max) |
+   | est_com  |bit   		|
+____________________________|
+							
+							
+							
+
+
+
+
