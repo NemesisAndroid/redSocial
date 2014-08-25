@@ -2,12 +2,21 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Red Social{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+		{# creando los bloques base para sobreescribirlos se crea de este modo por que seguiria una plantilla que heredaria de esta #}
+        {% block body %}
+			{# creando header para agregar el nav u otra cosa #}
+	        {% block header %}{% endblock %}
+			{# creando wrapper donde se presentaria el cuerpo o contenido de la web #}
+	        {% block wrapper %}{% endblock %}
+			{# creando footer para agregar el pie de la pagina #}
+	        {% block footer %}{% endblock %}
+        {% endblock %}
+
+		{% block javascripts %}{% endblock %}
     </body>
 </html>
