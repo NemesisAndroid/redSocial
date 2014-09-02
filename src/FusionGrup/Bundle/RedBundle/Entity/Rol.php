@@ -2,6 +2,7 @@
 
 namespace FusionGrup\Bundle\RedBundle\Entity;
 
+use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Rol
+class Rol implements RoleInterface
 {
     /**
      * @var integer
@@ -60,5 +61,13 @@ class Rol
     public function getNomRol()
     {
         return $this->nomRol;
+    }
+
+    public function getRole() {
+        return $this->getNomRol();
+    }
+ 
+    public function __toString() {
+        return $this->getRole();
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 namespace FusionGrup\Bundle\RedBundle\Entity;
-
+use FusionGrup\Bundle\RedBundle\Entity\Rol;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="FusionGrup\Bundle\RedBundle\Entity\UsuarioRepository")
  */
-class Usuario
+class Usuario implements UserInterface
 {
     /**
      * @var integer
@@ -24,20 +25,18 @@ class Usuario
     /**
      * @var integer
      *
-     * @ORM\Column(name="fk_id_pas", type="integer")
-     * @ORM\OneToOne(targetEntity="Pais")
+     * @ORM\ManyToOne(targetEntity="Pais")
      */
-    private $fkIdPas;
-
+    private $user_pais;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="fk_id_rol", type="integer")
-     * @ORM\OneToOne(targetEntity="Rol")
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="Rel_user_rol")
      */
 
-    private $fkIdRol;
+    private $user_roles;
     /**
      * @var string
      *
@@ -48,7 +47,7 @@ class Usuario
     /**
      * @var string
      *
-     * @ORM\Column(name="ape_usu", type="string", length=100)
+     * @ORM\Column(name="ape_usu", type="string", length=100)   
      */
     private $apeUsu;
 
@@ -56,8 +55,15 @@ class Usuario
      * @var \DateTime
      *
      * @ORM\Column(name="fec_usu", type="date")
-     */
+     */ 
     private $fecUsu;
+    
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="fec_ult", type="date")
+     */ 
+    private $fecUlt;
 
     /**
      * @var string
@@ -78,7 +84,7 @@ class Usuario
      *
      * @ORM\Column(name="pass_usu", type="string", length=255)
      */
-    private $passUsu;
+    private $password;
 
     /**
      * @var string
@@ -95,6 +101,75 @@ class Usuario
     private $estUsu;
 
 
+
+    public function __construct()
+    {
+        $this->user_roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+ 
+    public function getUsername(){
+        return $this->getMailUsu();
+    }
+
+    public function getPassword(){
+        return $this->password;
+    }
+    public function getSalt(){
+        return $this->getSalt();
+    }
+
+
+    /**
+     * Add user_roles
+     *
+     * @param Rol $userRoles
+     */
+    public function addRole(Rol $userRoles)
+    {
+        $this->user_roles[] = $userRoles;
+    }
+ 
+    public function setUserRoles($roles) {
+        $this->user_roles = $roles;
+    }
+ 
+    /**
+     * Get user_roles
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getUserRoles()
+    {
+        return $this->user_roles;
+    }
+ 
+    /**
+     * Get roles
+     *
+     * @return Doctrine\Common\Collections\Collection
+     */
+    public function getRoles()
+    {
+        return $this->user_roles->toArray(); //IMPORTANTE: el mecanismo de seguridad de Sf2 requiere ésto como un array
+    }
+ 
+
+    /**
+     * Compares this user to another to determine if they are the same.
+     *
+     * @param UserInterface $user The user
+     * @return boolean True if equal, false othwerwise.
+     */
+    public function equals(UserInterface $user) {
+        return md5($this->getUsername()) == md5($user->getUsername());
+ 
+    }
+     public function eraseCredentials(){
+
+    }
+
+
+
     /**
      * Get id
      *
@@ -106,49 +181,26 @@ class Usuario
     }
 
     /**
-     * Set fkIdPas
+     * Set user_pais
      *
-     * @param integer $fkIdPas
+     * @param integer $userPais
      * @return Usuario
      */
-    public function setFkIdPas($fkIdPas)
+    public function setUserPais($userPais)
     {
-        $this->fkIdPas = $fkIdPas;
+        $this->user_pais = $userPais;
 
         return $this;
     }
 
     /**
-     * Get fkIdPas
+     * Get user_pais
      *
      * @return integer 
      */
-    public function getFkIdPas()
+    public function getUserPais()
     {
-        return $this->fkIdPas;
-    }
-
-    /**
-     * Set fkIdRol
-     *
-     * @param integer $fkIdRol
-     * @return Usuario
-     */
-    public function setFkIdRol($fkIdRol)
-    {
-        $this->fkIdRol = $fkIdRol;
-
-        return $this;
-    }
-
-    /**
-     * Get fkIdRol
-     *
-     * @return integer 
-     */
-    public function getFkIdRol()
-    {
-        return $this->fkIdRol;
+        return $this->user_pais;
     }
 
     /**
@@ -267,26 +319,16 @@ class Usuario
     }
 
     /**
-     * Set passUsu
+     * Set password
      *
-     * @param string $passUsu
+     * @param string $password
      * @return Usuario
      */
-    public function setPassUsu($passUsu)
+    public function setPassword($password)
     {
-        $this->passUsu = $passUsu;
+        $this->password = $password;
 
         return $this;
-    }
-
-    /**
-     * Get passUsu
-     *
-     * @return string 
-     */
-    public function getPassUsu()
-    {
-        return $this->passUsu;
     }
 
     /**
@@ -300,16 +342,6 @@ class Usuario
         $this->salt = $salt;
 
         return $this;
-    }
-
-    /**
-     * Get salt
-     *
-     * @return string 
-     */
-    public function getSalt()
-    {
-        return $this->salt;
     }
 
     /**
@@ -333,5 +365,51 @@ class Usuario
     public function getEstUsu()
     {
         return $this->estUsu;
+    }
+
+    /**
+     * Add user_roles
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\Rol $userRoles
+     * @return Usuario
+     */
+    public function addUserRole(\FusionGrup\Bundle\RedBundle\Entity\Rol $userRoles)
+    {
+        $this->user_roles[] = $userRoles;
+
+        return $this;
+    }
+
+    /**
+     * Remove user_roles
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\Rol $userRoles
+     */
+    public function removeUserRole(\FusionGrup\Bundle\RedBundle\Entity\Rol $userRoles)
+    {
+        $this->user_roles->removeElement($userRoles);
+    }
+
+    /**
+     * Set fecUlt
+     *
+     * @param \DateTime $fecUlt
+     * @return Usuario
+     */
+    public function setFecUlt($fecUlt)
+    {
+        $this->fecUlt = $fecUlt;
+
+        return $this;
+    }
+
+    /**
+     * Get fecUlt
+     *
+     * @return \DateTime 
+     */
+    public function getFecUlt()
+    {
+        return $this->fecUlt;
     }
 }

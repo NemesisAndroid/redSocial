@@ -61,4 +61,9 @@ class Pais
     {
         return $this->nomPas;
     }
+
+    public function __toString() {
+        return $this->getNomPas();
+    }
+
 }

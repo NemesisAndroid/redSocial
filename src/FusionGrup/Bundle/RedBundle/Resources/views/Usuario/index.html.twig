@@ -1,0 +1,57 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Usuario list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nomusu</th>
+                <th>Apeusu</th>
+                <th>Fecusu</th>
+                <th>Fecult</th>
+                <th>Mailusu</th>
+                <th>Fecing</th>
+                <th>Password</th>
+                <th>Salt</th>
+                <th>Estusu</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('usuario_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.nomUsu }}</td>
+                <td>{{ entity.apeUsu }}</td>
+                <td>{% if entity.fecUsu %}{{ entity.fecUsu|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if entity.fecUlt %}{{ entity.fecUlt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.mailUsu }}</td>
+                <td>{% if entity.fecIng %}{{ entity.fecIng|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{{ entity.password }}</td>
+                <td>{{ entity.salt }}</td>
+                <td>{{ entity.estUsu }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('usuario_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('usuario_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('usuario_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}
