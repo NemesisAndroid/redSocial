@@ -118,7 +118,6 @@ class Usuario implements UserInterface
         return $this->getSalt();
     }
 
-
     /**
      * Add user_roles
      *
@@ -164,7 +163,8 @@ class Usuario implements UserInterface
         return md5($this->getUsername()) == md5($user->getUsername());
  
     }
-     public function eraseCredentials(){
+
+    public function eraseCredentials(){
 
     }
 

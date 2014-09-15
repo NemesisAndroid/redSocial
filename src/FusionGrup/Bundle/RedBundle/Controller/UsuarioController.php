@@ -22,7 +22,6 @@ class UsuarioController extends Controller
      * Lists all Usuario entities.
      *
      * @Route("/", name="usuario")
-     * @Method("GET")
      * @Template()
      */
     public function indexAction()
@@ -35,6 +34,61 @@ class UsuarioController extends Controller
             'entities' => $entities,
         );
     }
+
+
+    /**
+     * Lists all Usuario entities.
+     *
+     * @Route("/pdf", name="pdf")
+     */
+    public function pdfAction()
+    {
+        $pdfPath= $_SERVER["DOCUMENT_ROOT"];
+        $em = $this->getDoctrine()->getManager();
+
+        $entities = $em->getRepository('FusionGrupRedBundle:Usuario')->findAll();
+
+        $pdf = $this->get('white_october.tcpdf')->create();
+        // set document information
+        
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('');
+        $pdf->SetTitle('');
+        $pdf->SetSubject('');
+        $pdf->SetKeywords('');
+       
+        // remove default header/footer
+       $pdf->SetHeaderData(PDF_HEADER_LOGO, PDF_HEADER_LOGO_WIDTH,' sdkfjhasdjkfhkasjdfhkasjdfh', "sajfhjdasgfhkasdjgfhka");
+
+       // set header and footer fonts
+       $pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));
+       $pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));
+
+//        $pdf->setPrintHeader(false);
+//        $pdf->setPrintFooter(false);
+  
+        // set default monospaced font
+        $pdf->SetDefaultMonospacedFont(PDF_FONT_MONOSPACED);
+  
+        // set margins
+        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+  
+        // set auto page breaks
+        $pdf->SetAutoPageBreak(TRUE, PDF_MARGIN_BOTTOM);
+                     
+        $pdf->SetFont('helvetica', '', 10, '', true);
+  
+        $pdf->AddPage();
+  
+        $html = $this->renderView('FusionGrupRedBundle:Usuario:index.html.twig',  array('entities' => $entities,));
+  
+        $pdf -> writeHTML($html);
+       
+        $pdf->Output($pdfPath.'/pdfs/pnv.pdf', 'F');
+
+        return $this->redirect($this->generateUrl('usuario'));
+    }
+
     /**
      * Creates a new Usuario entity.
      *
@@ -244,4 +298,5 @@ class UsuarioController extends Controller
             ->getForm()
         ;
     }
+
 }

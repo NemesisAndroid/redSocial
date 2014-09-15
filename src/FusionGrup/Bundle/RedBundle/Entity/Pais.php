@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Pais
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="FusionGrup\Bundle\RedBundle\Entity\PaisRepository")
+ * @ORM\Entity()
  */
 class Pais
 {
