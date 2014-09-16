@@ -168,8 +168,6 @@ class Usuario implements UserInterface
 
     }
 
-
-
     /**
      * Get id
      *
