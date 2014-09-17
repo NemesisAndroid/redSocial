@@ -29,6 +29,7 @@ class TipoTema
     private $tipoComentario;
 
 
+
     /**
      * Get id
      *

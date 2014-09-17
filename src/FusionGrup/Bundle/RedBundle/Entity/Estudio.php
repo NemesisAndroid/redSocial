@@ -5,12 +5,12 @@ namespace FusionGrup\Bundle\RedBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * RespuestasDebate
+ * Estudio
  *
  * @ORM\Table()
  * @ORM\Entity
  */
-class RespuestasDebate
+class Estudio
 {
     /**
      * @var integer
@@ -29,23 +29,23 @@ class RespuestasDebate
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="Debate")
+     * @ORM\ManyToOne(targetEntity="NivelEstudio")
      */
-    private $fkDebate;
+    private $fkNivelEstudio;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="contenido", type="text")
+     * @ORM\Column(name="titulo", type="string", length=50)
      */
-    private $contenido;
+    private $titulo;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="est_respuesta_debate", type="boolean")
+     * @ORM\Column(name="est_titulo", type="boolean")
      */
-    private $estRespuestaDebate;
+    private $estTitulo;
 
 
 
@@ -60,56 +60,56 @@ class RespuestasDebate
     }
 
     /**
-     * Set contenido
+     * Set titulo
      *
-     * @param string $contenido
-     * @return RespuestasDebate
+     * @param string $titulo
+     * @return Estudio
      */
-    public function setContenido($contenido)
+    public function setTitulo($titulo)
     {
-        $this->contenido = $contenido;
+        $this->titulo = $titulo;
 
         return $this;
     }
 
     /**
-     * Get contenido
+     * Get titulo
      *
      * @return string 
      */
-    public function getContenido()
+    public function getTitulo()
     {
-        return $this->contenido;
+        return $this->titulo;
     }
 
     /**
-     * Set estRespuestaDebate
+     * Set estTitulo
      *
-     * @param boolean $estRespuestaDebate
-     * @return RespuestasDebate
+     * @param boolean $estTitulo
+     * @return Estudio
      */
-    public function setEstRespuestaDebate($estRespuestaDebate)
+    public function setEstTitulo($estTitulo)
     {
-        $this->estRespuestaDebate = $estRespuestaDebate;
+        $this->estTitulo = $estTitulo;
 
         return $this;
     }
 
     /**
-     * Get estRespuestaDebate
+     * Get estTitulo
      *
      * @return boolean 
      */
-    public function getEstRespuestaDebate()
+    public function getEstTitulo()
     {
-        return $this->estRespuestaDebate;
+        return $this->estTitulo;
     }
 
     /**
      * Set fkUsuario
      *
      * @param \FusionGrup\Bundle\RedBundle\Entity\Usuario $fkUsuario
-     * @return RespuestasDebate
+     * @return Estudio
      */
     public function setFkUsuario(\FusionGrup\Bundle\RedBundle\Entity\Usuario $fkUsuario = null)
     {
@@ -129,25 +129,25 @@ class RespuestasDebate
     }
 
     /**
-     * Set fkDebate
+     * Set fkNivelEstudio
      *
-     * @param \FusionGrup\Bundle\RedBundle\Entity\Debate $fkDebate
-     * @return RespuestasDebate
+     * @param \FusionGrup\Bundle\RedBundle\Entity\NivelEstudio $fkNivelEstudio
+     * @return Estudio
      */
-    public function setFkDebate(\FusionGrup\Bundle\RedBundle\Entity\Debate $fkDebate = null)
+    public function setFkNivelEstudio(\FusionGrup\Bundle\RedBundle\Entity\NivelEstudio $fkNivelEstudio = null)
     {
-        $this->fkDebate = $fkDebate;
+        $this->fkNivelEstudio = $fkNivelEstudio;
 
         return $this;
     }
 
     /**
-     * Get fkDebate
+     * Get fkNivelEstudio
      *
-     * @return \FusionGrup\Bundle\RedBundle\Entity\Debate 
+     * @return \FusionGrup\Bundle\RedBundle\Entity\NivelEstudio 
      */
-    public function getFkDebate()
+    public function getFkNivelEstudio()
     {
-        return $this->fkDebate;
+        return $this->fkNivelEstudio;
     }
 }

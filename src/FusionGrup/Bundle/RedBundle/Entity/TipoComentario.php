@@ -24,9 +24,9 @@ class TipoComentario
     /**
      * @var string
      *
-     * @ORM\Column(name="tipo_comentarioç", type="string", length=50)
+     * @ORM\Column(name="tipo_comentario", type="string", length=50)
      */
-    private $tipoComentarioç;
+    private $tipoComentario;
 
 
     /**
@@ -40,25 +40,25 @@ class TipoComentario
     }
 
     /**
-     * Set tipoComentarioç
+     * Set tipoComentario
      *
-     * @param string $tipoComentarioç
+     * @param string $tipoComentario
      * @return TipoComentario
      */
-    public function setTipoComentarioç($tipoComentarioç)
+    public function setTipoComentario($tipoComentario)
     {
-        $this->tipoComentarioç = $tipoComentarioç;
+        $this->tipoComentario = $tipoComentario;
 
         return $this;
     }
 
     /**
-     * Get tipoComentarioç
+     * Get tipoComentario
      *
      * @return string 
      */
-    public function getTipoComentarioç()
+    public function getTipoComentario()
     {
-        return $this->tipoComentarioç;
+        return $this->tipoComentario;
     }
 }

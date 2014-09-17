@@ -23,15 +23,12 @@ class DataExtra
 
     /**
      *
-     * @ORM\Column(name="fk_usuario", type="integer")
-     * @ORM\OneToOne(targetEntity="Usuario")
+     * @ORM\ManyToOne(targetEntity="Usuario")
      */
     private $fkUsuario;
 
     /**
-     * @var integer
      *
-     * @ORM\Column(name="fk_genero", type="integer")
      * @ORM\ManyToOne(targetEntity="GeneroExtra")
      */
     private $fkGenero;
@@ -51,6 +48,9 @@ class DataExtra
     private $estExtra;
 
 
+
+
+
     /**
      * Get id
      *
@@ -59,52 +59,6 @@ class DataExtra
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set fkUsuario
-     *
-     * @param integer $fkUsuario
-     * @return DataExtra
-     */
-    public function setFkUsuario($fkUsuario)
-    {
-        $this->fkUsuario = $fkUsuario;
-
-        return $this;
-    }
-
-    /**
-     * Get fkUsuario
-     *
-     * @return integer 
-     */
-    public function getFkUsuario()
-    {
-        return $this->fkUsuario;
-    }
-
-    /**
-     * Set fkGenero
-     *
-     * @param integer $fkGenero
-     * @return DataExtra
-     */
-    public function setFkGenero($fkGenero)
-    {
-        $this->fkGenero = $fkGenero;
-
-        return $this;
-    }
-
-    /**
-     * Get fkGenero
-     *
-     * @return integer 
-     */
-    public function getFkGenero()
-    {
-        return $this->fkGenero;
     }
 
     /**
@@ -151,5 +105,51 @@ class DataExtra
     public function getEstExtra()
     {
         return $this->estExtra;
+    }
+
+    /**
+     * Set fkUsuario
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\Usuario $fkUsuario
+     * @return DataExtra
+     */
+    public function setFkUsuario(\FusionGrup\Bundle\RedBundle\Entity\Usuario $fkUsuario = null)
+    {
+        $this->fkUsuario = $fkUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get fkUsuario
+     *
+     * @return \FusionGrup\Bundle\RedBundle\Entity\Usuario 
+     */
+    public function getFkUsuario()
+    {
+        return $this->fkUsuario;
+    }
+
+    /**
+     * Set fkGenero
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\GeneroExtra $fkGenero
+     * @return DataExtra
+     */
+    public function setFkGenero(\FusionGrup\Bundle\RedBundle\Entity\GeneroExtra $fkGenero = null)
+    {
+        $this->fkGenero = $fkGenero;
+
+        return $this;
+    }
+
+    /**
+     * Get fkGenero
+     *
+     * @return \FusionGrup\Bundle\RedBundle\Entity\GeneroExtra 
+     */
+    public function getFkGenero()
+    {
+        return $this->fkGenero;
     }
 }

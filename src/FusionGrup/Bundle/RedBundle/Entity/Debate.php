@@ -15,23 +15,21 @@ class Debate
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="pk_id_deb", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
-     * @var integer
      *
-     * @ORM\Column(name="fk_usuario", type="integer")
+     * @ORM\ManyToOne(targetEntity="Usuario")
      */
     private $fkUsuario;
 
     /**
-     * @var integer
      *
-     * @ORM\Column(name="fk_tipo_tema", type="integer")
+     * @ORM\ManyToOne(targetEntity="TipoTema")
      */
     private $fkTipoTema;
 
@@ -49,6 +47,7 @@ class Debate
      */
     private $estDebate;
 
+   
 
     /**
      * Get id
@@ -58,52 +57,6 @@ class Debate
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set fkUsuario
-     *
-     * @param integer $fkUsuario
-     * @return Debate
-     */
-    public function setFkUsuario($fkUsuario)
-    {
-        $this->fkUsuario = $fkUsuario;
-
-        return $this;
-    }
-
-    /**
-     * Get fkUsuario
-     *
-     * @return integer 
-     */
-    public function getFkUsuario()
-    {
-        return $this->fkUsuario;
-    }
-
-    /**
-     * Set fkTipoTema
-     *
-     * @param integer $fkTipoTema
-     * @return Debate
-     */
-    public function setFkTipoTema($fkTipoTema)
-    {
-        $this->fkTipoTema = $fkTipoTema;
-
-        return $this;
-    }
-
-    /**
-     * Get fkTipoTema
-     *
-     * @return integer 
-     */
-    public function getFkTipoTema()
-    {
-        return $this->fkTipoTema;
     }
 
     /**
@@ -150,5 +103,51 @@ class Debate
     public function getEstDebate()
     {
         return $this->estDebate;
+    }
+
+    /**
+     * Set fkUsuario
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\Usuario $fkUsuario
+     * @return Debate
+     */
+    public function setFkUsuario(\FusionGrup\Bundle\RedBundle\Entity\Usuario $fkUsuario = null)
+    {
+        $this->fkUsuario = $fkUsuario;
+
+        return $this;
+    }
+
+    /**
+     * Get fkUsuario
+     *
+     * @return \FusionGrup\Bundle\RedBundle\Entity\Usuario 
+     */
+    public function getFkUsuario()
+    {
+        return $this->fkUsuario;
+    }
+
+    /**
+     * Set fkTipoTema
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\TipoTema $fkTipoTema
+     * @return Debate
+     */
+    public function setFkTipoTema(\FusionGrup\Bundle\RedBundle\Entity\TipoTema $fkTipoTema = null)
+    {
+        $this->fkTipoTema = $fkTipoTema;
+
+        return $this;
+    }
+
+    /**
+     * Get fkTipoTema
+     *
+     * @return \FusionGrup\Bundle\RedBundle\Entity\TipoTema 
+     */
+    public function getFkTipoTema()
+    {
+        return $this->fkTipoTema;
     }
 }
