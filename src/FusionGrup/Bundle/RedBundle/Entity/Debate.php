@@ -15,7 +15,7 @@ class Debate
     /**
      * @var integer
      *
-     * @ORM\Column(name="pk_id_deb", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
