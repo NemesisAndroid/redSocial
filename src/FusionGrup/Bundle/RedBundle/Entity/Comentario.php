@@ -29,7 +29,7 @@ class Comentario
 
     /**
      *
-     * @ORM\ManyToOne(targetEntity="fkTipoComentario")
+     * @ORM\ManyToOne(targetEntity="TipoComentario")
      */
     private $fkTipoComentario;
 
