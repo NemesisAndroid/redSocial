@@ -51,6 +51,7 @@ class UsuarioController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+     
             $this->setSecurePassword($entity);       
             $entity->setFecUlt(new \DateTime('now'));
             $entity->setFecIng(new \DateTime('now'));

@@ -24,7 +24,7 @@
         {% for entity in entities %}
             <tr>
                 <td><a href="{{ path('usuario_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{#{ entity.user_pais }#} ni anda</td>
+                <td>{{ entity.userPais }}</td>
                 <td>{{ entity.nomUsu }}</td>
                 <td>{{ entity.apeUsu }}</td>
                 <td>{% if entity.fecUsu %}{{ entity.fecUsu|date('Y-m-d H:i:s') }}{% endif %}</td>

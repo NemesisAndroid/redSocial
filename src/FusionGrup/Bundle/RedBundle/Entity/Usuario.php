@@ -23,22 +23,6 @@ class Usuario implements UserInterface
     private $id;
 
     /**
-     * @var integer
-     *
-     * @ORM\ManyToOne(targetEntity="Pais",inversedBy="usuario")
-     * @ORM\JoinColumn(name="user_pais", referencedColumnName="id")
-     */
-    private $user_pais;
-
-    /**
-     * @var integer
-     *
-     * @ORM\ManyToMany(targetEntity="Rol")
-     * @ORM\JoinTable(name="Rel_user_rol")
-     */
-
-    private $user_roles;
-    /**
      * @var string
      *
      * @ORM\Column(name="nom_usu", type="string", length=100)
@@ -103,11 +87,23 @@ class Usuario implements UserInterface
 
 
 
-    public function __construct()
-    {
-        $this->user_roles = new \Doctrine\Common\Collections\ArrayCollection();
-    }
- 
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToOne(targetEntity="Pais")
+     * @ORM\JoinColumn(name="user_pais", referencedColumnName="id")
+     */
+    private $user_pais;
+
+    /**
+     * @var integer
+     *
+     * @ORM\ManyToMany(targetEntity="Rol")
+     * @ORM\JoinTable(name="Rel_user_rol")
+     */
+
+    private $user_roles;
+
     public function getUsername(){
         return $this->getMailUsu();
     }
@@ -169,8 +165,13 @@ class Usuario implements UserInterface
 
     }
 
-
-
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->user_roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id

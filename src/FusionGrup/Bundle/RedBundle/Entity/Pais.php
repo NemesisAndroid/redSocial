@@ -28,12 +28,9 @@ class Pais
      */
     private $nomPas;
 
-
-      /**
-       *
-       * @ORM\OneToMany(targetEntity="Usuario", mappedBy="user_pais")
-       */
-      private $usuario;
+    public function __toString() {
+        return $this->nomPas;
+    }
 
     /**
      * Get id
@@ -66,50 +63,5 @@ class Pais
     public function getNomPas()
     {
         return $this->nomPas;
-    }
-
-    public function __toString() {
-        return $this->getNomPas();
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->usuario = new \Doctrine\Common\Collections\ArrayCollection();
-    }
-
-    /**
-     * Add usuario
-     *
-     * @param \FusionGrup\Bundle\RedBundle\Entity\Usuario $usuario
-     * @return Pais
-     */
-    public function addUsuario(\FusionGrup\Bundle\RedBundle\Entity\Usuario $usuario)
-    {
-        $this->usuario[] = $usuario;
-
-        return $this;
-    }
-
-    /**
-     * Remove usuario
-     *
-     * @param \FusionGrup\Bundle\RedBundle\Entity\Usuario $usuario
-     */
-    public function removeUsuario(\FusionGrup\Bundle\RedBundle\Entity\Usuario $usuario)
-    {
-        $this->usuario->removeElement($usuario);
-    }
-
-    /**
-     * Get usuario
-     *
-     * @return \Doctrine\Common\Collections\Collection 
-     */
-    public function getUsuario()
-    {
-        return $this->usuario;
     }
 }
