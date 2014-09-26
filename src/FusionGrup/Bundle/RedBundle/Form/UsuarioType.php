@@ -19,26 +19,34 @@ class UsuarioType extends AbstractType
                     'label'=>'Ingrese su Pais',
                     'attr'=>array('class'=>'form form-control'),
                 ))
-            ->add('nomUsu',null,array(
+            ->add('apeUsu',null,array(
+                    'label'=>'Apellido',
                     'attr'=>array('class'=>'form form-control')
                 ))
-            ->add('apeUsu')
+            ->add('nomUsu',null,array(
+                    'label'=>'Nombre',
+                    'attr'=>array('class'=>'form form-control')
+                ))
             ->add('fecUsu', null, array(
                     'label'=>'Ingrese su Fecha Nacimiento',
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',))
-            ->add('mailUsu','email')
-            ->add('fecUlt', 'date',  array(
+            ->add('mailUsu','email',array(
+                    'label'=>'Correo electronico',
+                    'attr'=>array('class'=>'form form-control')
+                ))
+            ->add('password')
+
+/*            ->add('fecUlt', 'date',  array(
                     'label'=>'Fecha de Ultimo Ingreso',
                     'widget' => 'single_text',
                     'format' => 'yyyy-MM-dd',))
             ->add('fecIng', 'date',  array(
                     'label'=>'Fecha de Primer Ingreso',
                     'widget' => 'single_text',
-                    'format' => 'yyyy-MM-dd',))
-            ->add('password')
-            ->add('estUsu')
-            ->add('user_roles')
+                    'format' => 'yyyy-MM-dd',       ))*/
+//            ->add('estUsu')
+//            ->add('user_roles')
 
         ;
     }

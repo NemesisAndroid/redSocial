@@ -38,7 +38,7 @@ class Rol implements RoleInterface
     public function getId()
     {
         return $this->id;
-    }
+        }
 
     /**
      * Set nomRol
@@ -68,6 +68,6 @@ class Rol implements RoleInterface
     }
  
     public function __toString() {
-        return $this->getRole();
+        return $this->nomRol;
     }
 }

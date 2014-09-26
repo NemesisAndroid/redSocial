@@ -25,7 +25,8 @@ class Usuario implements UserInterface
     /**
      * @var integer
      *
-     * @ORM\ManyToOne(targetEntity="Pais")
+     * @ORM\ManyToOne(targetEntity="Pais",inversedBy="usuario")
+     * @ORM\JoinColumn(name="user_pais", referencedColumnName="id")
      */
     private $user_pais;
 
@@ -115,7 +116,7 @@ class Usuario implements UserInterface
         return $this->password;
     }
     public function getSalt(){
-        return $this->getSalt();
+        return $this->salt;
     }
 
     /**
@@ -168,6 +169,9 @@ class Usuario implements UserInterface
 
     }
 
+
+
+
     /**
      * Get id
      *
@@ -176,29 +180,6 @@ class Usuario implements UserInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set user_pais
-     *
-     * @param integer $userPais
-     * @return Usuario
-     */
-    public function setUserPais($userPais)
-    {
-        $this->user_pais = $userPais;
-
-        return $this;
-    }
-
-    /**
-     * Get user_pais
-     *
-     * @return integer 
-     */
-    public function getUserPais()
-    {
-        return $this->user_pais;
     }
 
     /**
@@ -268,6 +249,29 @@ class Usuario implements UserInterface
     public function getFecUsu()
     {
         return $this->fecUsu;
+    }
+
+    /**
+     * Set fecUlt
+     *
+     * @param \DateTime $fecUlt
+     * @return Usuario
+     */
+    public function setFecUlt($fecUlt)
+    {
+        $this->fecUlt = $fecUlt;
+
+        return $this;
+    }
+
+    /**
+     * Get fecUlt
+     *
+     * @return \DateTime 
+     */
+    public function getFecUlt()
+    {
+        return $this->fecUlt;
     }
 
     /**
@@ -366,6 +370,29 @@ class Usuario implements UserInterface
     }
 
     /**
+     * Set user_pais
+     *
+     * @param \FusionGrup\Bundle\RedBundle\Entity\Pais $userPais
+     * @return Usuario
+     */
+    public function setUserPais(\FusionGrup\Bundle\RedBundle\Entity\Pais $userPais = null)
+    {
+        $this->user_pais = $userPais;
+
+        return $this;
+    }
+
+    /**
+     * Get user_pais
+     *
+     * @return \FusionGrup\Bundle\RedBundle\Entity\Pais 
+     */
+    public function getUserPais()
+    {
+        return $this->user_pais;
+    }
+
+    /**
      * Add user_roles
      *
      * @param \FusionGrup\Bundle\RedBundle\Entity\Rol $userRoles
@@ -386,28 +413,5 @@ class Usuario implements UserInterface
     public function removeUserRole(\FusionGrup\Bundle\RedBundle\Entity\Rol $userRoles)
     {
         $this->user_roles->removeElement($userRoles);
-    }
-
-    /**
-     * Set fecUlt
-     *
-     * @param \DateTime $fecUlt
-     * @return Usuario
-     */
-    public function setFecUlt($fecUlt)
-    {
-        $this->fecUlt = $fecUlt;
-
-        return $this;
-    }
-
-    /**
-     * Get fecUlt
-     *
-     * @return \DateTime 
-     */
-    public function getFecUlt()
-    {
-        return $this->fecUlt;
     }
 }
