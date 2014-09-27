@@ -88,7 +88,11 @@ class UsuarioController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+                'label' => 'Registrar',
+                'attr'=>array('class'=>'btn btn-primary form-control')
+                ));
+
 
         return $form;
     }
@@ -177,7 +181,7 @@ class UsuarioController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array('label' => 'Actualizar'));
 
         return $form;
     }
@@ -203,9 +207,12 @@ class UsuarioController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
+
+            $this->setSecurePassword($entity);       
+
             $em->flush();
 
-            return $this->redirect($this->generateUrl('usuario_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('usuario_show', array('id' => $id)));
         }
 
         return array(

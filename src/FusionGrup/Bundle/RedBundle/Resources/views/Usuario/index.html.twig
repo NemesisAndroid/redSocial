@@ -3,21 +3,21 @@
 {% block body -%}
     <h1>Usuario list</h1>
 
-    <table class="records_list">
+    <table class="table table-bordered table-condensed">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Pais</th>
-                <th>Nomusu</th>
-                <th>Apeusu</th>
-                <th>Fecusu</th>
-                <th>Fecult</th>
-                <th>Mailusu</th>
-                <th>Fecing</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Nacimiento</th>
+                <th>Ultima vez Ingreso</th>
+                <th>Correo</th>
+                <th>Fecha Ingreso</th>
                 <th>Password</th>
-                <th>Salt</th>
-                <th>Estusu</th>
-                <th>Actions</th>
+                {#<th>Salt</th>#}
+                <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -27,12 +27,24 @@
                 <td>{{ entity.userPais }}</td>
                 <td>{{ entity.nomUsu }}</td>
                 <td>{{ entity.apeUsu }}</td>
-                <td>{% if entity.fecUsu %}{{ entity.fecUsu|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if entity.fecUlt %}{{ entity.fecUlt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    {% if entity.fecUsu %}
+                        {{ entity.fecUsu|date('d-m-Y') }}
+                    {% endif %}
+                </td>
+                <td>
+                    {% if entity.fecUlt %}
+                        {{ entity.fecUlt|date('d-m-Y') }}
+                    {% endif %}
+                </td>
                 <td>{{ entity.mailUsu }}</td>
-                <td>{% if entity.fecIng %}{{ entity.fecIng|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    {% if entity.fecIng %}
+                        {{ entity.fecIng|date('d-m-Y') }}
+                    {% endif %}
+                </td>
                 <td>{{ entity.password }}</td>
-                <td>{{ entity.salt }}</td>
+                {#<td>{{ entity.salt }}</td>#}
                 <td>{{ entity.estUsu }}</td>
                 <td>
                 <ul>

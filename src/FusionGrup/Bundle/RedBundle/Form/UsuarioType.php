@@ -35,7 +35,10 @@ class UsuarioType extends AbstractType
                     'label'=>'Correo electronico',
                     'attr'=>array('class'=>'form form-control')
                 ))
-            ->add('password')
+            ->add('password', 'password', array(
+                    'label'=>'Ingrese su Clave',
+                    'attr'=>array('class'=>'form form-control'),
+                ))
 
 /*            ->add('fecUlt', 'date',  array(
                     'label'=>'Fecha de Ultimo Ingreso',
