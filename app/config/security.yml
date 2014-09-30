@@ -9,7 +9,7 @@ security:
 
     providers:
         administrators:
-            entity: { class: FusionGrupRedBundle:Usuario }
+            entity: { class: FusionGrupRedBundle:Usuario, property: mailUsu }
     firewalls:
         secured_area:
             pattern: ^/

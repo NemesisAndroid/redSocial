@@ -266,39 +266,11 @@ class UsuarioController extends Controller
 
     private function setSecurePassword($entity) {
         $entity->setSalt(md5(time()));
-        $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
+        $encoder = $this->get('security.encoder_factory')->getEncoder($entity);
         $password = $encoder->encodePassword($entity->getPassword(), $entity->getSalt());
         $entity->setPassword($password);
     }
 
-    /**
-     * @Route("/login", name="login")
-     * @Template()
-     */
-    public function loginAction()
-    {
-        $request = $this->getRequest();
-        $session = $request->getSession();
-        //obtiene el error
-        if ($request->attributes->has(SecurityContext::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(SecurityContext::AUTHENTICATION_ERROR);
-        } else {
-            $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
-            $session->remove(SecurityContext::AUTHENTICATION_ERROR);
-        }
-        
-        return array(
-            //ultimo nombre de usuario ingresado
-            'last_username' => $session->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error,
-        );
-    }
-    /**
-     * @Route("/logout")
-     * @Template()
-     */
-    public function logoutAction()
-    {
-    }
+
 
 }

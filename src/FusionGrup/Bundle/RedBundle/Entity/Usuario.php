@@ -182,7 +182,9 @@ class Usuario implements UserInterface,  \Serializable
          */
         return \serialize(array(
             $this->id,
-            $this->email,
+            $this->mailUsu,
+            $this->nomUsu,
+            $this->apeUsu,
             $this->salt,
             $this->password
         ));
@@ -194,7 +196,9 @@ class Usuario implements UserInterface,  \Serializable
     {
         list (
             $this->id,
-            $this->email,
+            $this->mailUsu,
+            $this->nomUsu,
+            $this->apeUsu,
             $this->salt,
             $this->password
         ) = \unserialize($serialized);
