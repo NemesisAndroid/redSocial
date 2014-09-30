@@ -3,3 +3,5 @@ fusion_grup_red:
     type:     annotation
     prefix:   /
 
+login_check:
+    pattern: /login_check

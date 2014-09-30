@@ -1,10 +1,19 @@
 {% extends '::lyt_inicio.html.twig' %}
-{# Hello {{ name }}! #}
 {% block form %}
-    <form action="" method="post">
-        <input name="user" type="mail" placeholder="username">
-        <input type="password" placeholder="password">
-        <button class="btn btn-info btn-block login" type="submit">Login</button>
-    	<a href="{{ path('usuario_new') }}" class="btn btn-success btn-block login" type="button">Registrarse</a>
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+	<form action="{{ path('login_check') }}" method="post">
+	    <label for="username">Username:</label>
+	    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+	    <label for="password">Password:</label>
+	    <input type="password" id="password" name="_password" />
+
+	    <button type="submit">login</button>
+
+	   	<a href="{{ path('usuario_new') }}" class="btn btn-success btn-block login" type="button">Registrarse</a>
+
 	</form>
+
 {% endblock %}

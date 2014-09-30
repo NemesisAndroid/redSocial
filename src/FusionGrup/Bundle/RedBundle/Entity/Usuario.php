@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="FusionGrup\Bundle\RedBundle\Entity\UsuarioRepository")
  */
-class Usuario implements UserInterface
+class Usuario implements UserInterface,  \Serializable
 {
     /**
      * @var integer
@@ -148,7 +148,6 @@ class Usuario implements UserInterface
     {
         return $this->user_roles->toArray(); //IMPORTANTE: el mecanismo de seguridad de Sf2 requiere ésto como un array
     }
- 
 
     /**
      * Compares this user to another to determine if they are the same.
@@ -171,6 +170,34 @@ class Usuario implements UserInterface
     public function __construct()
     {
         $this->user_roles = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        /*
+         * ! Don't serialize $roles field !
+         */
+        return \serialize(array(
+            $this->id,
+            $this->email,
+            $this->salt,
+            $this->password
+        ));
+    }
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->email,
+            $this->salt,
+            $this->password
+        ) = \unserialize($serialized);
     }
 
     /**

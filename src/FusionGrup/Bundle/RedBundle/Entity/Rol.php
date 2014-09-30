@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Rol implements RoleInterface
+class Rol implements RoleInterface, \Serializable
 {
     /**
      * @var integer
@@ -29,6 +29,34 @@ class Rol implements RoleInterface
      */
     private $nomRol;
 
+    public function getRole()
+    {
+        return $this->getNombre();
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return \serialize(array(
+            $this->id,
+            $this->nombre
+        ));
+    }
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list(
+            $this->id,
+            $this->nombre
+        ) = \unserialize($serialized);
+    }
+    public function __toString() {
+        return $this->nomRol;
+    }
 
     /**
      * Get id
@@ -38,7 +66,7 @@ class Rol implements RoleInterface
     public function getId()
     {
         return $this->id;
-        }
+    }
 
     /**
      * Set nomRol
@@ -60,14 +88,6 @@ class Rol implements RoleInterface
      */
     public function getNomRol()
     {
-        return $this->nomRol;
-    }
-
-    public function getRole() {
-        return $this->getNomRol();
-    }
- 
-    public function __toString() {
         return $this->nomRol;
     }
 }
