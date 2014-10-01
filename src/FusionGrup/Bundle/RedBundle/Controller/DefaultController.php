@@ -22,6 +22,15 @@ class DefaultController extends Controller
             'error'         => '',
         );      
     }
+    /**
+     * @Route("/inicio")
+     * @Template()
+     */
+    public function panelAction()
+    {
+        $user = $this->getUser();
+        return $this->render('FusionGrupRedBundle:Default:iniciologin.html.twig', array('entity' => $user));
+    }
 
     /**
      * @Route("/login", name="login")
@@ -38,7 +47,7 @@ class DefaultController extends Controller
             $error = $session->get(SecurityContext::AUTHENTICATION_ERROR);
             $session->remove(SecurityContext::AUTHENTICATION_ERROR);
         }
-        
+
         return array(
             //ultimo nombre de usuario ingresado
             'last_username' => $session->get(SecurityContext::LAST_USERNAME),

@@ -12,10 +12,15 @@ security:
             entity: { class: FusionGrupRedBundle:Usuario, property: mailUsu }
     firewalls:
         secured_area:
-            pattern: ^/
+            pattern: ^/*
             anonymous: ~
-            form_login: ~
-            logout: ~
+            form_login: 
+                login_path: /
+                check_path: /login_check
+                default_target_path: /inicio
+            logout:
+                path: /logout
+                target: /
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

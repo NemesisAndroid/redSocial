@@ -46,7 +46,7 @@ class Usuario implements UserInterface,  \Serializable
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="fec_ult", type="date")
+     * @ORM\Column(name="fec_ult", type="date", nullable=true)
      */ 
     private $fecUlt;
 
@@ -181,7 +181,7 @@ class Usuario implements UserInterface,  \Serializable
          * ! Don't serialize $roles field !
          */
         return \serialize(array(
-            $this->id,
+            $this->id,  
             $this->mailUsu,
             $this->nomUsu,
             $this->apeUsu,

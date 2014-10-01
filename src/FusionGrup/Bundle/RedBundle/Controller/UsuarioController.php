@@ -182,6 +182,7 @@ class UsuarioController extends Controller
         ));
 
         $form->add('submit', 'submit', array('label' => 'Actualizar'));
+        $form->add('password', 'password', array('required' => false));
 
         return $form;
     }
@@ -198,6 +199,8 @@ class UsuarioController extends Controller
 
         $entity = $em->getRepository('FusionGrupRedBundle:Usuario')->find($id);
 
+        /* Guardo la contraseña para comparar si cambio actualizo si dejo en blanco no hago nada*/
+        $oldPassword=$entity->getPassword();
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Usuario entity.');
         }
@@ -207,8 +210,9 @@ class UsuarioController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-
-            $this->setSecurePassword($entity);       
+            if ($oldPassword!= $entity->getPassword()) {
+                $this->setSecurePassword($entity);       
+            }
 
             $em->flush();
 
